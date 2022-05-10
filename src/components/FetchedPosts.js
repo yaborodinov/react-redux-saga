@@ -1,7 +1,7 @@
 import React from 'react'
 import Post from './Post'
 
-export default ({posts}) => {
+const FetchedPosts = ({posts}) => {
 	return(
 		<div className='text-center mt-3'>
 			{posts.length === 0 ?
@@ -10,3 +10,5 @@ export default ({posts}) => {
 		</div>
 	)
 }
+
+export default FetchedPosts
