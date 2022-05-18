@@ -7,7 +7,7 @@ const Posts = ({syncPosts}) => {
 		<div className='text-center mt-3'>
 			{syncPosts.length ===0 ?
 			<h3 className='h5'><i>no Posts...</i></h3> :
-			syncPosts.map((post, index) => <Post post={post} key={post+index}/>)}
+			syncPosts.map((post, index) => <Post title={post.title} key={post.id}/>)}
 		</div>
 	)
 }

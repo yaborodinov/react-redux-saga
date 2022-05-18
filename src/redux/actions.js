@@ -4,7 +4,7 @@ import { CREATE_POST } from './types'
 export const createPost = (post) => {      // action creator
     return {
         type: CREATE_POST,
-        payload: post.title          // в этот payload присваивается значение передаваемое в этот экшн криейтор "post" 
+        payload: post          // в этот payload присваивается значение передаваемое в этот экшн криейтор "post" 
     }
 }
 
