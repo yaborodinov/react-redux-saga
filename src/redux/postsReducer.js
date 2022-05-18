@@ -1,8 +1,16 @@
+import { CREATE_POST } from './types'
+
 const initialState = {
     posts: [1,2,4,55, 66],
     fetchedPosts: ['a','b']
 }
 
 export const postsReducer = (state = initialState, action) => {
-    return state
+    switch(action.type){                                              // пишем кейс в редьюсере
+        case CREATE_POST:
+            return { 
+                ...state, posts: [...state.posts, action.payload]
+            }
+        default: return state
+    }
 }
