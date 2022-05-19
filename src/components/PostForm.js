@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {createPost} from '../redux/actions'
+import {createPost, showAlert, hideAlert } from '../redux/actions'
+import Alert from './Alert'
 class PostForm extends React.Component {
     constructor(props) {
         super(props)
@@ -20,7 +21,11 @@ class PostForm extends React.Component {
             id: Date.now().toString()
         }
 
-        this.state.title.trim() && this.props.createPost(newPost)
+        if (title.trim()) {
+            this.props.createPost(newPost)
+        } else {
+            this.props.showAlert('Post can not be empty string')
+        }
         
         this.setState({title: ''})
     }
@@ -31,29 +36,43 @@ class PostForm extends React.Component {
         }}))
     )
     render() {
+        console.log('alert><>', this.props.alert);
         return(
-            <form onSubmit={this.handlerSubmit}>
-                <div className="form-group">
-                    <label className='mb-2' htmlFor="title">Post Title</label>
-                    <input
-                        type="text"
-                        className="form-control mb-2"
-                        id="title"
-                        placeholder="Type..."
-                        name='title'
-                        value={this.state.title}
-                        onChange={this.changeInputHandler}
-                    />
-                </div>
-                <button className="btn btn-success" type='submit'>Create</button>
-            </form>
+            <>
+                {this.props.alert && <Alert text={this.props.alert}/>}
+                <form onSubmit={this.handlerSubmit}>
+                    <div className="form-group">
+                        <label className='mb-2' htmlFor="title">Post Title</label>
+                        <input
+                            type="text"
+                            className="form-control mb-2"
+                            id="title"
+                            placeholder="Type..."
+                            name='title'
+                            value={this.state.title}
+                            onChange={this.changeInputHandler}
+                            onFocus={()=> this.props.hideAlert()}
+                        />
+                    </div>
+                    <button className="btn btn-success" type='submit'>Create</button>
+                </form>
+            </>
+            
         )
         
     }
 }
 
 const mapDispatchToProps = {       // мапим функцию dispatch на пропсы
-    createPost
+    createPost,
+    showAlert,
+    hideAlert
 }
 
-export default connect(null, mapDispatchToProps)(PostForm)     // первый параметр что щас null - это state ; второй параметр - функция диспатч
+const mapStateToProps = state => {
+    return {
+        alert: state.app.alert       // app это название редьюсера в rootReducer
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm)     // первый параметр сейчас это созданный проп alert; второй параметр - функция диспатч
