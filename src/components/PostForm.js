@@ -36,7 +36,6 @@ class PostForm extends React.Component {
         }}))
     )
     render() {
-        console.log('alert><>', this.props.alert);
         return(
             <>
                 {this.props.alert && <Alert text={this.props.alert}/>}
