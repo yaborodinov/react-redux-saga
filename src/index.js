@@ -7,10 +7,14 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { rootReducer } from './redux/rootReducer';
 import { forbiddenWordsMiddleware } from './redux/middleware';
+import thunk from 'redux-thunk';
 
 const store = configureStore({
   reducer: rootReducer, 
-  middleware: [forbiddenWordsMiddleware]                          // добавляем кастомный middleware
+  middleware: [
+    thunk,
+    forbiddenWordsMiddleware
+  ]                          // добавляем кастомный middleware
 },
   // compose(                                                     // configureStore взято из @reduxjs/toolkit (не классический redux)
   // applyMiddleware(                                             // можно без подключения applyMiddleware  thunk
