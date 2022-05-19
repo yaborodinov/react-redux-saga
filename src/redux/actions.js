@@ -22,7 +22,7 @@ export const hideLoader = () => {
     }
 }
 
-//
+// alert
 
 export const showAlert = (text) => {
     return {

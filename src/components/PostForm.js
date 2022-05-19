@@ -30,11 +30,12 @@ class PostForm extends React.Component {
         this.setState({title: ''})
     }
 
-    changeInputHandler = (e) => (
+    changeInputHandler = (e) => {
         this.setState(prev => ({...prev, ...{
             [e.target.name]: e.target.value
         }}))
-    )
+        this.props.hideAlert()
+    }
     render() {
         return(
             <>
@@ -50,7 +51,6 @@ class PostForm extends React.Component {
                             name='title'
                             value={this.state.title}
                             onChange={this.changeInputHandler}
-                            onFocus={()=> this.props.hideAlert()}
                         />
                     </div>
                     <button className="btn btn-success" type='submit'>Create</button>
