@@ -1,5 +1,5 @@
 // import { createAction } from '@reduxjs/toolkit'
-import { CREATE_POST, FETCHED_POSTS, HIDE_ALERT, HIDE_LOADER, REQUEST_POSTS, SHOW_ALERT, SHOW_LOADER } from './types'
+import { CREATE_POST, HIDE_ALERT, HIDE_LOADER, REQUEST_POSTS, SHOW_ALERT, SHOW_LOADER } from './types'
 
 export const createPost = (post) => {      // action creator
     return {
