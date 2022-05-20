@@ -8,13 +8,18 @@ import App from './App';
 import { rootReducer } from './redux/rootReducer';
 import { forbiddenWordsMiddleware } from './redux/middleware';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from '@redux-saga/core';
+import { sagaWatcher } from './redux/sagas';
+
+const saga = createSagaMiddleware()             // saga это теперь middleware
 
 const store = configureStore({
   reducer: rootReducer, 
-  middleware: [
+  middleware: [                          // добавляем кастомный middleware
     thunk,
-    forbiddenWordsMiddleware
-  ]                          // добавляем кастомный middleware
+    forbiddenWordsMiddleware,
+    saga                                 // добавляем сагу
+  ]                          
 },
   // compose(                                                     // configureStore взято из @reduxjs/toolkit (не классический redux)
   // applyMiddleware(                                             // можно без подключения applyMiddleware  thunk
@@ -22,6 +27,8 @@ const store = configureStore({
   // ),
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()      // в '@reduxjs/toolkit' эта строка не обязательна
 )
+
+saga.run(sagaWatcher)             // привязываем вотчер
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

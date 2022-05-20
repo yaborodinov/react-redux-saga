@@ -1,5 +1,5 @@
 // import { createAction } from '@reduxjs/toolkit'
-import { CREATE_POST, FETCHED_POSTS, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER } from './types'
+import { CREATE_POST, FETCHED_POSTS, HIDE_ALERT, HIDE_LOADER, REQUEST_POSTS, SHOW_ALERT, SHOW_LOADER } from './types'
 
 export const createPost = (post) => {      // action creator
     return {
@@ -40,21 +40,24 @@ export const hideAlert = () => {
 //fetchedPosts
 
 export const fetchPosts = () => {
-    return async dispatch => {
-        try {
-            dispatch(showLoader())
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
-        const posts = await response.json()
-        dispatch({
-            type: FETCHED_POSTS,
-            payload: posts
-        })
-        dispatch(hideLoader())
-        } catch (error) {
-            dispatch(showAlert(error.message))
-            dispatch(hideLoader())
-        }
+return {
+    type: REQUEST_POSTS
+}
+
+    // return async dispatch => {
+    //     try {
+    //         dispatch(showLoader())
+    //     const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
+    //     const posts = await response.json()
+    //     dispatch({
+    //         type: FETCHED_POSTS,
+    //         payload: posts
+    //     })
+    //     dispatch(hideLoader())
+    //     } catch (error) {
+    //         dispatch(showAlert(error.message))
+    //         dispatch(hideLoader())
+    //     }
         
-    }
-    
+    // }
 }
