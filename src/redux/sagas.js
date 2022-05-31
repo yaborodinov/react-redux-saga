@@ -20,7 +20,6 @@ function* sagaWorker() {
         yield put(showAlert(error.message))   // если какая-нибудь ошибка - диспатчим эти 2 экшна
         yield put(hideLoader())
     }
-    
 }
 
 async function fetchPosts() {            //4* функция для запроса на сервер (просто вынесли ее)
